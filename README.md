@@ -1,240 +1,170 @@
-# \# User Management Service
+﻿# User Management Service
+
+Backend service for user management with role-based access control, implemented with **Spring Boot**, **Spring Security**, **Spring MVC**, and **REST API**.
+
+## Overview
+
+This project demonstrates a classic layered architecture:
+
+`Controller -> Service -> Repository -> Database`
+
+The application includes:
+- MVC pages for admin/user workflows
+- REST API for user and role management
+- Authentication and authorization with role checks
 
-# 
+## Tech Stack
 
-# Backend application for managing users with role-based access control.
+- Java
+- Spring Boot
+- Spring Security
+- Spring MVC + Thymeleaf
+- Spring Data JPA (Hibernate)
+- MySQL
+- Maven
 
-# 
+## Features
 
-# This project demonstrates a typical \*\*Spring Boot layered architecture\*\* with authentication and authorization using \*\*Spring Security\*\*.
+- Form-based authentication (`/login`)
+- Role-based access control (`ADMIN`, `USER`)
+- User CRUD operations
+- DTO-based API contracts
+- MVC + REST in one application
 
-# 
+## Access Model
 
-# The application provides both \*\*REST API endpoints\*\* and \*\*MVC web pages\*\* for managing users.
+- `ADMIN`:
+  - `/admin/**`
+  - `/user`
+  - all authenticated API endpoints
+- `USER`:
+  - `/user`
+  - `/api/user/me`
 
-# 
+Public routes:
+- `/`
+- `/login`
 
-# ---
+## API Endpoints
 
-# 
+### Admin API
 
-# \## Tech Stack
+Base path: `/api`
 
-# 
+- `GET /api/roles` - list available roles
+- `GET /api/users` - list all users
+- `GET /api/users/{id}` - get user by id
+- `POST /api/users` - create user
+- `PUT /api/users/{id}` - update user
+- `DELETE /api/users/{id}` - delete user
 
-# \- Java
+### User API
 
-# \- Spring Boot
+Base path: `/api/user`
 
-# \- Spring Security
+- `GET /api/user/me` - get current authenticated user
 
-# \- Spring MVC
+## MVC Endpoints
 
-# \- JPA / Hibernate
+- `GET /login` - login page
+- `GET /user` - user profile page (`USER` or `ADMIN`)
+- `GET /admin` - admin panel (`ADMIN`)
 
-# \- Maven
+## Project Structure
 
-# 
+```text
+user-management-service/
+├── src/
+│   ├── main/
+│   │   ├── java/com/jarik/usermanagement/
+│   │   │   ├── config/
+│   │   │   ├── controller/
+│   │   │   │   └── api/
+│   │   │   ├── dto/
+│   │   │   │   └── api/
+│   │   │   ├── mapper/
+│   │   │   ├── model/
+│   │   │   ├── repository/
+│   │   │   └── service/
+│   │   └── resources/
+│   │       ├── static/js/
+│   │       ├── templates/
+│   │       ├── application.properties
+│   │       └── data.sql
+│   └── test/
+├── pom.xml
+├── mvnw
+├── mvnw.cmd
+└── README.md
+```
 
-# ---
+## Quick Start
 
-# 
+### 1. Clone and enter the project
 
-# \## Features
+```bash
+git clone https://github.com/Jarikjarik/user-management-service.git
+cd user-management-service
+```
 
-# 
+### 2. Configure database
 
-# \- Authentication using Spring Security
+Default datasource in `src/main/resources/application.properties`:
 
-# \- Role-based access control (`ADMIN`, `USER`)
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/user_crud_2
+spring.datasource.username=root
+spring.datasource.password=dbrootdb
+```
 
-# \- CRUD operations for users
+Create the database before starting the app:
 
-# \- REST API endpoints
+```sql
+CREATE DATABASE user_crud_2;
+```
 
-# \- MVC web interface
+### 3. Run the app
 
-# \- DTO layer with entity mapping
+Windows:
 
-# 
+```bash
+mvnw.cmd spring-boot:run
+```
 
-# ---
+Linux/macOS:
 
-# 
+```bash
+./mvnw spring-boot:run
+```
 
-# \## Architecture
+Application URL:
+- [http://localhost:8080](http://localhost:8080)
 
-# 
+### 4. Run tests
 
-# The project follows a classic \*\*layered architecture\*\*:
+Windows:
 
-# 
+```bash
+mvnw.cmd test
+```
 
-# 
+Linux/macOS:
 
-# Controller → Service → Repository → Database
+```bash
+./mvnw test
+```
 
-# 
+## Seed Data
 
-# 
+Initial users are loaded from `data.sql` on startup.
 
-# \### Package structure
+Default accounts:
+- `admin` (roles: `ADMIN`, `USER`)
+- `user` (role: `USER`)
 
-# 
+> Passwords are stored in BCrypt hash form in `data.sql`.
 
-# 
+## Author
 
-# src/main/java/com/jarik/usermanagement
-
-# 
-
-# config – application and security configuration
-
-# controller – MVC and REST controllers
-
-# dto – request and response objects
-
-# mapper – DTO ↔ Entity mapping
-
-# model – JPA entities
-
-# repository – data access layer
-
-# service – business logic
-
-# 
-
-# 
-
-# ---
-
-# 
-
-# \## Project Structure
-
-# 
-
-# 
-
-# user-management-service
-
-# │
-
-# ├── src
-
-# │ ├── main
-
-# │ │ ├── java/com/jarik/usermanagement
-
-# │ │ │ ├── config
-
-# │ │ │ ├── controller
-
-# │ │ │ ├── dto
-
-# │ │ │ ├── mapper
-
-# │ │ │ ├── model
-
-# │ │ │ ├── repository
-
-# │ │ │ └── service
-
-# │ │ │
-
-# │ │ └── resources
-
-# │ │ ├── application.properties
-
-# │ │ ├── templates
-
-# │ │ └── static
-
-# │ │
-
-# │ └── test
-
-# │
-
-# ├── pom.xml
-
-# ├── mvnw
-
-# ├── mvnw.cmd
-
-# └── README.md
-
-# 
-
-# 
-
-# ---
-
-# 
-
-# \## Running the Application
-
-# 
-
-# Clone the repository:
-
-# 
-
-# ```bash
-
-# git clone https://github.com/Jarikjarik/user-management-service.git
-
-# 
-
-# Move to project folder:
-
-# 
-
-# cd user-management-service
-
-# 
-
-# Run the application:
-
-# 
-
-# Windows
-
-# mvnw.cmd spring-boot:run
-
-# Linux / macOS
-
-# ./mvnw spring-boot:run
-
-# 
-
-# The application will start at:
-
-# 
-
-# http://localhost:8080
-
-# Running Tests
-
-# ./mvnw test
-
-# 
-
-# or on Windows:
-
-# 
-
-# mvnw.cmd test
-
-# Author
-
-# 
-
-# Yaroslav Chekashkin
-
-# 
-
-# GitHub:
-
-# https://github.com/Jarikjarik
-
+Yaroslav Chekashkin  
+GitHub: [@Jarikjarik](https://github.com/Jarikjarik)
