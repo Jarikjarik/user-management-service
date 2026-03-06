@@ -1,0 +1,21 @@
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Maven
+target/
+
+# Logs
+*.log
+
+# JVM crash logs
+hs_err_pid*.log
+hs_err_pid*.jfr
+*.jfr
+
+# Environment
+.env
+
+# OS
+.DS_Store
+Thumbs.db
