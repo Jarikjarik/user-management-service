@@ -90,14 +90,21 @@ src/main/java/com/jarik/usermanagement
 
 ## UI Preview
 
-Current interface includes:
+### Login Page
 
-- login page for authentication
-- admin panel with user table and management actions
-- user information page for authenticated users
-- Swagger UI for REST API exploration
+![Login page](docs/screenshots/localhost_8080_login.png)
 
-Note: screenshot files were provided during review, but they are not yet stored inside the repository as local image assets. Once image files are added to the repo, they can be embedded here directly.
+### Admin Panel
+
+![Admin panel](docs/screenshots/localhost_8080_admin.png)
+
+### User Page
+
+![User page](docs/screenshots/localhost_8080_user.png)
+
+### Swagger UI
+
+![Swagger UI](docs/screenshots/localhost_8080_swagger-ui_index.html.png)
 
 ## Endpoints
 
@@ -223,6 +230,7 @@ Container credentials:
 ```text
 user-management-service/
 |-- .github/workflows/ci.yml
+|-- docs/screenshots/
 |-- src/
 |   |-- main/
 |   |   |-- java/com/jarik/usermanagement/
